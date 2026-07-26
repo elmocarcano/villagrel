@@ -6,7 +6,7 @@
 <title>Villa Grel — A private retreat above Lake Como</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
 <style>
 :root{
   --cream:#F2EEE4;
@@ -245,8 +245,8 @@ footer{background:var(--ink);color:rgba(250,247,240,.7);padding:clamp(64px,10vh,
     <a href="#villa" class="link">The Villa</a>
     <a href="#gallery" class="link">Gallery</a>
     <a href="#setting" class="link">The Setting</a>
-    <a href="#journal" class="link">Journal</a>
-    <a href="#about" class="link">About</a>
+    <a href="journal/" class="link">Journal</a>
+    <a href="#hosts" class="link">About</a>
     <a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener" class="book">Book now</a>
   </div>
   <div class="burger" id="burger"><span></span><span></span><span></span></div>
@@ -314,43 +314,121 @@ footer{background:var(--ink);color:rgba(250,247,240,.7);padding:clamp(64px,10vh,
   </div>
 </section>
 
-<!-- THE SETTING -->
-<section class="setting" id="setting">
-  <div class="setting-bg"><img src="assets/img/hero.jpg" alt="Lake Como seen from Cardina"></div>
+<style>
+.setting2{background:var(--paper)}
+.map-wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(24px,4vw,56px);align-items:center;margin-top:44px}
+.map-fig{background:linear-gradient(160deg,#edefe9,#e4e8df);border:1px solid var(--line-soft);border-radius:4px;padding:16px}
+.map-fig svg{width:100%;height:auto;display:block}
+.lake{fill:none;stroke:#a9bcbd;stroke-opacity:.6;stroke-width:22;stroke-linecap:round;stroke-linejoin:round}
+.marker{cursor:pointer}
+.marker circle{fill:#fff;stroke:var(--sage-deep);stroke-width:2;transition:fill .3s var(--ease)}
+.marker text{font-family:'Inter';font-size:12.5px;fill:var(--ink);letter-spacing:.01em}
+.marker:hover circle,.marker.active circle{fill:var(--sage-deep)}
+.marker.villa circle{fill:var(--sage-deep);stroke:#fff;stroke-width:2.5}
+.marker.villa text{font-weight:600;fill:var(--sage-deep)}
+.marker:focus{outline:none}.marker:focus circle{stroke-width:3}
+.map-panel .eb{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep)}
+.map-panel h3{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(28px,3.6vw,42px);color:var(--ink);margin:8px 0 12px;line-height:1.05}
+.map-panel .time{display:inline-block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--sage);padding:6px 15px;border-radius:100px;margin-bottom:18px}
+.map-panel p{font-size:16px;color:var(--ink-soft);max-width:44ch}
+.dest-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);margin-top:42px}
+.dest{background:var(--paper);padding:16px 18px;cursor:pointer;transition:background .3s var(--ease)}
+.dest:hover,.dest.active{background:var(--cream)}
+.dest .n{font-family:'Cormorant Garamond',serif;font-size:20px;color:var(--ink);line-height:1.1}
+.dest .t{font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--sage-deep);margin-top:5px}
+@media(max-width:820px){.map-wrap{grid-template-columns:1fr}}
+.hosts{background:var(--cream)}
+.hosts-grid{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(30px,5vw,72px);align-items:center}
+.hosts-photo{position:relative;aspect-ratio:4/5;overflow:hidden;border-radius:3px;box-shadow:var(--shadow)}
+.hosts-photo img{width:100%;height:100%;object-fit:cover}
+.hosts-photo .cap{position:absolute;left:0;bottom:0;background:var(--paper);padding:9px 16px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft)}
+.hosts-copy h2{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:clamp(30px,4vw,50px);color:var(--ink);line-height:1.1;margin:14px 0 22px}
+.hosts-copy p{font-size:16px;color:var(--ink-soft);margin-bottom:15px;max-width:54ch}
+.sig{font-family:'Great Vibes',cursive;font-size:48px;color:var(--sage-deep);margin-top:14px;line-height:1}
+@media(max-width:820px){.hosts-grid{grid-template-columns:1fr}.hosts-photo{max-height:66vh}}
+</style>
+<!-- THE SETTING (interactive map) -->
+<section class="setting2" id="setting">
   <div class="wrap">
     <div class="shead reveal">
       <div class="eyebrow">The Setting</div>
-      <h2>The lake begins <em>at the garden gate</em>.</h2>
+      <h2 style="font-size:clamp(28px,4vw,52px);max-width:20ch;color:var(--ink)">One quiet hillside, the whole lake within reach.</h2>
     </div>
-    <div class="places">
-      <div class="place reveal"><div class="idx">01</div><h3>Bellagio</h3><div class="meta">45 min by car</div><p>The point where the lake divides — cobbled lanes, gardens and long lunches.</p></div>
-      <div class="place reveal d1"><div class="idx">02</div><h3>Varenna</h3><div class="meta">Ferry across</div><p>A fishing village of ochre houses and a lakeside walk carved into the rock.</p></div>
-      <div class="place reveal d2"><div class="idx">03</div><h3>Como</h3><div class="meta">15 min down the hill</div><p>Silk ateliers, the cathedral, and aperitivo along the promenade.</p></div>
-      <div class="place reveal"><div class="idx">04</div><h3>Brunate</h3><div class="meta">The funicular</div><p>A short climb to the balcony over the lake and the ridge trails beyond.</p></div>
-      <div class="place reveal d1"><div class="idx">05</div><h3>On the water</h3><div class="meta">Private boat</div><p>A wooden runabout at golden hour, arranged for your arrival.</p></div>
-      <div class="place reveal d2"><div class="idx">06</div><h3>The trails</h3><div class="meta">From the door</div><p>Chestnut woods and ridge walks that begin a few steps from the gate.</p></div>
-      <div class="place reveal"><div class="idx">07</div><h3>The table</h3><div class="meta">Fine dining</div><p>From Michelin rooms to lakeside trattorie — a reservation is a call away.</p></div>
+    <div class="map-wrap">
+      <div class="map-fig reveal"><svg viewBox="0 0 400 610" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Stylised map of Lake Como with Villa Grel and nearby destinations">
+<path class="lake" d="M240,55 L240,330 L150,555"/>
+<path class="lake" d="M240,330 L330,555"/>
+<g class="marker villa active" data-k="villa" tabindex="0" role="button" aria-label="Villa Grel"><circle cx="115" cy="505" r="6.5"/><text x="115" y="527" text-anchor="middle">Villa Grel</text></g>
+<g class="marker" data-k="como" tabindex="0" role="button" aria-label="Como"><circle cx="150" cy="555" r="5.5"/><text x="139" y="559" text-anchor="end">Como</text></g>
+<g class="marker" data-k="cernobbio" tabindex="0" role="button" aria-label="Cernobbio"><circle cx="168" cy="510" r="5.5"/><text x="181" y="514" text-anchor="start">Cernobbio</text></g>
+<g class="marker" data-k="moltrasio" tabindex="0" role="button" aria-label="Moltrasio"><circle cx="186" cy="463" r="5.5"/><text x="199" y="467" text-anchor="start">Moltrasio</text></g>
+<g class="marker" data-k="brunate" tabindex="0" role="button" aria-label="Brunate"><circle cx="190" cy="548" r="5.5"/><text x="203" y="552" text-anchor="start">Brunate</text></g>
+<g class="marker" data-k="bellagio" tabindex="0" role="button" aria-label="Bellagio"><circle cx="240" cy="330" r="5.5"/><text x="253" y="334" text-anchor="start">Bellagio</text></g>
+<g class="marker" data-k="menaggio" tabindex="0" role="button" aria-label="Menaggio"><circle cx="215" cy="250" r="5.5"/><text x="203" y="254" text-anchor="end">Menaggio</text></g>
+<g class="marker" data-k="varenna" tabindex="0" role="button" aria-label="Varenna"><circle cx="268" cy="256" r="5.5"/><text x="281" y="260" text-anchor="start">Varenna</text></g>
+<g class="marker" data-k="lugano" tabindex="0" role="button" aria-label="Lugano"><circle cx="60" cy="440" r="5.5"/><text x="60" y="461" text-anchor="middle">Lugano</text></g>
+</svg></div>
+      <div class="map-panel reveal d1" id="mapPanel">
+        <div class="eb" id="mpEb">You are here</div>
+        <h3 id="mpName">Villa Grel</h3>
+        <span class="time" id="mpTime">Cardina, above Como</span>
+        <p id="mpDesc">Your home on the hillside above Como — private, green and framed by olive trees, yet only minutes from the water. Tap a marker to see how close the lake's most beautiful places really are.</p>
+      </div>
+    </div>
+    <div class="dest-grid reveal d1"><div class="dest active" data-k="villa"><div class="n">Villa Grel</div><div class="t">Cardina</div></div><div class="dest" data-k="como"><div class="n">Como</div><div class="t">~15 min</div></div><div class="dest" data-k="cernobbio"><div class="n">Cernobbio</div><div class="t">~15 min</div></div><div class="dest" data-k="moltrasio"><div class="n">Moltrasio</div><div class="t">~20 min</div></div><div class="dest" data-k="brunate"><div class="n">Brunate</div><div class="t">~15 min + funicular</div></div><div class="dest" data-k="bellagio"><div class="n">Bellagio</div><div class="t">~50 min / ferry</div></div><div class="dest" data-k="varenna"><div class="n">Varenna</div><div class="t">~1 hr / ferry</div></div><div class="dest" data-k="menaggio"><div class="n">Menaggio</div><div class="t">~50 min</div></div><div class="dest" data-k="lugano"><div class="n">Lugano · CH</div><div class="t">~40 min</div></div></div>
+    <p class="reveal" style="font-size:12.5px;color:var(--ink-soft);font-style:italic;margin-top:20px">Travel times are approximate, from Villa Grel by car unless noted. Bellagio, Varenna and Menaggio are also connected by scenic ferry.</p>
+  </div>
+</section>
+
+<!-- MEET YOUR HOSTS -->
+<section class="hosts" id="hosts">
+  <div class="wrap">
+    <div class="hosts-grid">
+      <div class="hosts-photo reveal">
+        <img src="assets/img/hosts.jpg" alt="Elmo and Greta, your hosts at Villa Grel">
+        <span class="cap">Elmo &amp; Greta · at Villa Grel</span>
+      </div>
+      <div class="hosts-copy reveal d1">
+        <div class="eyebrow" style="display:flex;align-items:center;gap:14px"><span style="width:32px;height:1px;background:var(--stone)"></span>Meet your hosts</div>
+        <h2>We're Elmo &amp; Greta.</h2>
+        <p>We're Guglielmo — Elmo to most — and Greta, and we're so glad you're thinking of staying at Villa Grel on Lake Como.</p>
+        <p>We live in Geneva for now, but our hearts have always belonged to this corner of the lake. Villa Grel is far more than a holiday home to us: it's the place where we dream of building our family life one day. Until then, it's our joy to share it with families and friends from around the world, who make memories of their own here.</p>
+        <p>For me, Elmo, the lake has always been home. I grew up here, spent countless hours rowing these waters with Canottieri Moltrasio, and went to school in Cernobbio, just minutes from the villa. Every path and hidden corner holds a memory.</p>
+        <p>Greta grew up in Vimercate, near Monza, and studied Architecture in Mendrisio, just across the Swiss border — where we met six years ago. Her eye for beautiful spaces shaped many of the details you'll find throughout the house.</p>
+        <p>We were married at the start of this summer, and we hope that one day Villa Grel will become our permanent home. Until then, it's our pleasure to welcome guests who will love it as much as we do. Whether you come to relax, to celebrate with friends, or to discover Lake Como, we hope it feels less like a rental and more like a home. We can't wait to welcome you.</p>
+        <div class="sig">Elmo &amp; Greta</div>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- WHY -->
-<section id="why">
-  <div class="wrap">
-    <div class="why-grid">
-      <div class="why-lead reveal">
-        <h2>Book with us <em>directly</em> — the same villa, without the platform.</h2>
-        <p>The same dates at the same rate you would pay online, only closer to the people who own the house. No service fees, and a direct line for anything you need.</p>
-      </div>
-      <div class="why-cell reveal"><div class="num">i.</div><h3>Best rate, no fees</h3><p>The platform rate without the platform commission — value that stays between us.</p></div>
-      <div class="why-cell reveal d1"><div class="num">ii.</div><h3>The owners, directly</h3><p>Plan your stay with the family who knows the house, not an anonymous inbox.</p></div>
-      <div class="why-cell reveal d2"><div class="num">iii.</div><h3>Concierge on request</h3><p>Boat, chef, transfers and tables — arranged before you arrive.</p></div>
-      <div class="why-cell reveal"><div class="num">iv.</div><h3>Garden &amp; parking</h3><p>A private lawn under the olives, a garage and space for every car.</p></div>
-      <div class="why-cell reveal d1"><div class="num">v.</div><h3>Lake &amp; mountain views</h3><p>Three bedrooms and the terrace look out over the water and the hills.</p></div>
-      <div class="why-cell reveal d2"><div class="num">vi.</div><h3>Dogs welcome</h3><p>Bring the whole family — the four-legged ones included.</p></div>
-    </div>
-  </div>
-</section>
+<script>
+(function(){
+ var D={
+  villa:{eb:"You are here",name:"Villa Grel",time:"Cardina, above Como",desc:"Your home on the hillside above Como \u2014 private, green and framed by olive trees, yet only minutes from the water. Tap a marker to see how close the lake\u2019s most beautiful places really are."},
+  como:{eb:"The lakeside capital",name:"Como",time:"~15 min by car",desc:"The elegant capital of the lake: the marble Duomo, silk boutiques, the funicular and aperitivo along the promenade."},
+  cernobbio:{eb:"Grand villas & lakefront",name:"Cernobbio",time:"~15 min by car",desc:"A refined village of historic villas and lakefront caf\u00e9s \u2014 home to Villa d\u2019Este and the Concorso d\u2019Eleganza. Elmo went to school here."},
+  moltrasio:{eb:"A quiet western shore",name:"Moltrasio",time:"~20 min by car",desc:"A peaceful hamlet of stone lanes and waterfalls, and the home of Canottieri Moltrasio, the rowing club where Elmo grew up on the water."},
+  brunate:{eb:"The balcony over Como",name:"Brunate",time:"~15 min + funicular",desc:"A short funicular ride lifts you above the city to sweeping views, a lighthouse and gentle ridge walks."},
+  bellagio:{eb:"The pearl of the lake",name:"Bellagio",time:"~50 min by car or ferry",desc:"Where the two arms of the lake meet: cobbled staircases, terraced gardens and unhurried lakeside lunches."},
+  varenna:{eb:"A romantic village",name:"Varenna",time:"~1 hr by car or ferry",desc:"Ochre houses tumbling to the water and the lakeside \u2018walk of lovers\u2019 \u2014 loveliest reached by boat."},
+  menaggio:{eb:"Western shore",name:"Menaggio",time:"~50 min by car",desc:"A lively town with a pretty promenade and easy ferries across to Bellagio and Varenna."},
+  lugano:{eb:"Just over the border",name:"Lugano",time:"~40 min by car \u00b7 Switzerland",desc:"A chic Swiss lakeside city of boutiques, museums and Mediterranean flair \u2014 an easy day trip across the border."}
+ };
+ function set(k){
+  var d=D[k];if(!d)return;
+  document.getElementById('mpEb').textContent=d.eb;
+  document.getElementById('mpName').textContent=d.name;
+  document.getElementById('mpTime').textContent=d.time;
+  document.getElementById('mpDesc').textContent=d.desc;
+  document.querySelectorAll('.marker,.dest').forEach(function(el){el.classList.toggle('active',el.getAttribute('data-k')===k);});
+ }
+ document.querySelectorAll('.marker,.dest').forEach(function(el){
+  el.addEventListener('click',function(){set(el.getAttribute('data-k'));});
+  el.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();set(el.getAttribute('data-k'));}});
+ });
+})();
+</script>
 
 <!-- QUOTES -->
 <section class="quotes" id="reviews">
@@ -376,6 +454,43 @@ footer{background:var(--ink);color:rgba(250,247,240,.7);padding:clamp(64px,10vh,
   </div>
 </section>
 
+<!-- FROM THE JOURNAL -->
+<style>
+.jteaser-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,40px)}
+.jteaser-card{display:block;background:var(--cream);border:1px solid var(--line-soft);border-radius:3px;overflow:hidden;transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.jteaser-card:hover{transform:translateY(-4px);box-shadow:0 30px 60px -34px rgba(37,33,24,.5)}
+.jteaser-card img{transition:transform 1.2s var(--ease)}
+.jteaser-card:hover img{transform:scale(1.05)}
+@media(max-width:720px){.jteaser-grid{grid-template-columns:1fr}}
+</style>
+<section id="journal" style="background:var(--paper)">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">The Journal</div>
+      <h2 style="font-size:clamp(28px,3.6vw,46px);max-width:22ch">Notes from the hill above Como — updated weekly</h2>
+    </div>
+    <div class="jteaser-grid">
+      <a class="jteaser-card reveal" href="journal/eventi-como-questa-settimana.html">
+        <div style="aspect-ratio:16/10;overflow:hidden"><img src="assets/img/hero.jpg" alt="Lake Como from Cardina" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="padding:26px 28px 30px">
+          <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep)">What's on · This week</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:var(--ink);margin:12px 0 10px;line-height:1.15">What's on near Villa Grel this week</h3>
+          <p style="font-size:15px;color:var(--ink-soft)">Open-air cinema, the city's summer season, a lakeside sagra and the opening of the football season — all a short drive away.</p>
+        </div>
+      </a>
+      <a class="jteaser-card reveal d1" href="journal/gelaterie-vicino-villa-grel.html">
+        <div style="aspect-ratio:16/10;overflow:hidden"><img src="assets/img/outdoor.jpg" alt="Summer by Lake Como" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="padding:26px 28px 30px">
+          <div style="font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep)">Tastes of the lake · July 2026</div>
+          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:500;font-size:26px;color:var(--ink);margin:12px 0 10px;line-height:1.15">The best gelato within reach of Villa Grel</h3>
+          <p style="font-size:15px;color:var(--ink-soft)">Four artisan gelaterie in Como our guests return to — each minutes down the hill from the villa.</p>
+        </div>
+      </a>
+    </div>
+    <div class="reveal d2" style="margin-top:36px"><a href="journal/" style="font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--sage-deep);border-bottom:1px solid var(--stone);padding-bottom:4px">Read the Journal &rarr;</a></div>
+  </div>
+</section>
+
 <!-- FOOTER -->
 <footer id="about">
   <div class="wrap">
@@ -386,11 +501,11 @@ footer{background:var(--ink);color:rgba(250,247,240,.7);padding:clamp(64px,10vh,
       </div>
       <div class="f-cols">
         <div class="f-col"><h4>Explore</h4>
-          <a href="#villa">The Villa</a><a href="#gallery">Gallery</a><a href="#setting">The Setting</a><a href="#journal">Journal</a></div>
+          <a href="#villa">The Villa</a><a href="#gallery">Gallery</a><a href="#setting">The Setting</a><a href="journal/">Journal</a></div>
         <div class="f-col"><h4>Book</h4>
-          <a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener">Availability &amp; rates</a><a href="#reviews">Reviews</a><a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener">Book now</a></div>
+          <a href="journal/">Journal</a><a href="#reviews">Reviews</a><a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener">Book now</a></div>
         <div class="f-col"><h4>Reach us</h4>
-          <a href="#">Instagram</a><a href="#">WhatsApp</a><a href="#">Email</a></div>
+          <a href="https://wa.me/393759802684" target="_blank" rel="noopener">WhatsApp</a><a href="mailto:info@myhomeincomo.com">Email</a></div>
       </div>
     </div>
     <div class="f-bottom">
