@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Villa Grel — A private retreat above Lake Como</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --cream:#F2EEE4;
+  --paper:#FAF7F0;
+  --ink:#252118;
+  --ink-soft:#6a6357;
+  --sage:#7c8570;
+  --sage-deep:#586052;
+  --stone:#a89c89;
+  --line:rgba(37,33,24,.15);
+  --line-soft:rgba(37,33,24,.08);
+  --shadow:0 24px 60px -30px rgba(37,33,24,.45);
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--cream);
+  color:var(--ink);
+  font-family:'Inter',-apple-system,sans-serif;
+  font-weight:300;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+
+/* --- type helpers --- */
+.eyebrow{
+  font-family:'Inter';font-weight:400;font-size:11px;letter-spacing:.32em;
+  text-transform:uppercase;color:var(--sage-deep);
+}
+.serif{font-family:'Cormorant Garamond',serif}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.08;letter-spacing:.005em}
+
+/* --- reveal --- */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.09s}.reveal.d2{transition-delay:.18s}
+.reveal.d3{transition-delay:.27s}.reveal.d4{transition-delay:.36s}
+
+/* --- nav --- */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:26px clamp(20px,5vw,64px);
+  transition:background .6s var(--ease),padding .6s var(--ease),box-shadow .6s var(--ease);
+}
+.nav.solid{background:var(--cream);box-shadow:0 1px 0 var(--line-soft),0 10px 30px -24px rgba(37,33,24,.5);padding-top:18px;padding-bottom:18px}
+.nav .brand{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:.34em;font-weight:500;color:#fff;transition:color .6s var(--ease)}
+.nav.solid .brand{color:var(--ink)}
+.nav .brand .dot{color:var(--stone)}
+.menu{display:flex;gap:34px;align-items:center}
+.menu a.link{
+  font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.86);
+  font-weight:400;position:relative;padding:4px 0;transition:color .5s var(--ease)
+}
+.nav.solid .menu a.link{color:var(--ink-soft)}
+.menu a.link::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:0;background:currentColor;transition:width .4s var(--ease)}
+.menu a.link:hover::after{width:100%}
+.book{
+  font-family:'Inter';font-size:12px;letter-spacing:.16em;text-transform:uppercase;font-weight:400;
+  border:1px solid rgba(255,255,255,.55);color:#fff;padding:11px 24px;border-radius:2px;
+  transition:all .5s var(--ease);white-space:nowrap;
+}
+.book:hover{background:#fff;color:var(--ink);border-color:#fff}
+.nav.solid .book{border-color:var(--sage);color:var(--sage-deep)}
+.nav.solid .book:hover{background:var(--sage-deep);color:var(--paper);border-color:var(--sage-deep)}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:6px}
+.burger span{width:24px;height:1.5px;background:#fff;transition:background .5s}
+.nav.solid .burger span{background:var(--ink)}
+
+/* --- hero --- */
+.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:flex-end;overflow:hidden}
+.hero-media{position:absolute;inset:0;z-index:-2}
+.hero-media img{transform:scale(1.08);animation:kb 24s ease-out forwards}
+@keyframes kb{to{transform:scale(1)}}
+.hero::after{content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(30,27,20,.34) 0%,rgba(30,27,20,.05) 32%,rgba(30,27,20,.12) 62%,rgba(30,27,20,.62) 100%)}
+.hero-inner{width:100%;padding:0 clamp(20px,5vw,64px) clamp(46px,7vh,86px);color:#fff}
+.hero .eyebrow{color:rgba(255,255,255,.82);margin-bottom:26px}
+.hero h1{font-size:clamp(44px,8.5vw,116px);font-weight:300;color:#fff;letter-spacing:.01em}
+.hero h1 em{font-style:italic;font-weight:300}
+.hero .sub{
+  display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap;
+  margin-top:34px;padding-top:30px;border-top:1px solid rgba(255,255,255,.28);max-width:none
+}
+.hero .sub p{font-size:15px;color:rgba(255,255,255,.9);max-width:340px;font-weight:300}
+.hero-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn-ghost{
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#fff;
+  border:1px solid rgba(255,255,255,.6);padding:15px 30px;border-radius:2px;transition:all .5s var(--ease)
+}
+.btn-ghost:hover{background:#fff;color:var(--ink)}
+.btn-solid{
+  font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
+  background:var(--paper);padding:16px 30px;border-radius:2px;transition:all .5s var(--ease);border:1px solid var(--paper)
+}
+.btn-solid:hover{background:transparent;color:#fff;border-color:#fff}
+.scrollcue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:2;
+  font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.7);
+  display:flex;flex-direction:column;align-items:center;gap:8px}
+.scrollcue .l{width:1px;height:34px;background:rgba(255,255,255,.5);animation:cue 2.4s var(--ease) infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);transform-origin:top;opacity:.4}50%{transform:scaleY(1);opacity:1}}
+
+/* --- section frame --- */
+section{padding:clamp(78px,12vh,150px) clamp(20px,5vw,64px)}
+.wrap{max-width:1280px;margin:0 auto}
+.shead{display:flex;flex-direction:column;gap:18px;margin-bottom:56px}
+.shead .eyebrow{display:flex;align-items:center;gap:16px}
+.shead .eyebrow::before{content:"";width:34px;height:1px;background:var(--stone)}
+
+/* --- intro / the villa --- */
+.intro-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(36px,6vw,90px);align-items:center}
+.intro h2{font-size:clamp(30px,4vw,52px);color:var(--ink);margin-bottom:26px}
+.intro h2 em{font-style:italic;color:var(--sage-deep)}
+.intro p{font-size:16.5px;color:var(--ink-soft);max-width:44ch;margin-bottom:22px}
+.stats{display:flex;flex-wrap:wrap;gap:0;margin-top:38px;border-top:1px solid var(--line)}
+.stat{flex:1 1 33%;min-width:130px;padding:22px 0;border-bottom:1px solid var(--line-soft)}
+.stat .n{font-family:'Cormorant Garamond',serif;font-size:34px;color:var(--sage-deep);line-height:1}
+.stat .l{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft);margin-top:9px}
+.intro-media{position:relative;aspect-ratio:4/5;overflow:hidden;box-shadow:var(--shadow)}
+.intro-media img{transition:transform 1.4s var(--ease)}
+.intro-media:hover img{transform:scale(1.05)}
+.intro-media .tag{position:absolute;left:0;bottom:0;background:var(--paper);padding:12px 20px;
+  font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+
+/* --- gallery --- */
+.gallery{background:var(--paper)}
+.g-grid{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(12px,1.6vw,22px);grid-auto-flow:dense}
+.g-item{overflow:hidden;position:relative}
+.g-item img{transition:transform 1.6s var(--ease)}
+.g-item:hover img{transform:scale(1.06)}
+.g-a{grid-column:span 7;aspect-ratio:16/11}
+.g-b{grid-column:span 5;aspect-ratio:4/5}
+.g-c{grid-column:span 5;aspect-ratio:4/5}
+.g-d{grid-column:span 7;aspect-ratio:16/11}
+.g-e{grid-column:span 4;aspect-ratio:1/1}
+.g-f{grid-column:span 4;aspect-ratio:1/1}
+.g-g{grid-column:span 4;aspect-ratio:1/1}
+
+/* --- setting --- */
+.setting{position:relative;color:#fff;overflow:hidden}
+.setting-bg{position:absolute;inset:0;z-index:-2}
+.setting::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,27,20,.72),rgba(30,27,20,.58))}
+.setting .eyebrow{color:rgba(255,255,255,.8)}
+.setting .shead .eyebrow::before{background:rgba(255,255,255,.6)}
+.setting h2{font-size:clamp(30px,4.4vw,58px);color:#fff;max-width:16ch}
+.setting h2 em{font-style:italic}
+.places{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:0;margin-top:64px;
+  border-top:1px solid rgba(255,255,255,.24)}
+.place{padding:30px 26px 30px 0;border-bottom:1px solid rgba(255,255,255,.14);
+  border-right:1px solid rgba(255,255,255,.1);position:relative;transition:padding-left .5s var(--ease)}
+.place:hover{padding-left:12px}
+.place .idx{font-size:11px;letter-spacing:.2em;color:rgba(255,255,255,.55)}
+.place h3{font-size:27px;color:#fff;margin:12px 0 8px}
+.place .meta{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin-bottom:12px}
+.place p{font-size:14px;color:rgba(255,255,255,.72);font-weight:300;max-width:30ch}
+
+/* --- why --- */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.why-cell{padding:44px 34px 40px;border-bottom:1px solid var(--line);border-right:1px solid var(--line);
+  transition:background .5s var(--ease)}
+.why-cell:hover{background:var(--paper)}
+.why-cell .num{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:var(--stone)}
+.why-cell h3{font-size:24px;color:var(--ink);margin:16px 0 12px}
+.why-cell p{font-size:14.5px;color:var(--ink-soft);max-width:34ch}
+.why-lead{grid-column:span 3;background:var(--sage-deep);color:var(--paper);padding:52px 40px;
+  display:flex;justify-content:space-between;align-items:center;gap:30px;flex-wrap:wrap;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.why-lead h2{font-size:clamp(26px,3.2vw,40px);color:var(--paper);max-width:20ch}
+.why-lead h2 em{font-style:italic;color:#dfe1d6}
+.why-lead p{font-size:14px;color:rgba(250,247,240,.8);max-width:32ch}
+
+/* --- testimonials --- */
+.quotes{background:var(--paper)}
+.q-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(28px,4vw,60px)}
+.q blockquote{font-family:'Cormorant Garamond',serif;font-size:clamp(21px,1.9vw,26px);line-height:1.4;
+  color:var(--ink);font-weight:400}
+.q blockquote::before{content:"\201C";font-size:56px;color:var(--stone);line-height:0;display:block;margin-bottom:6px}
+.q .by{margin-top:22px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+.q .stars{color:var(--sage);letter-spacing:3px;font-size:13px;margin-top:6px}
+
+/* --- booking cta --- */
+.cta{position:relative;color:#fff;text-align:center;overflow:hidden;padding-top:clamp(120px,20vh,220px);padding-bottom:clamp(120px,20vh,220px)}
+.cta-bg{position:absolute;inset:0;z-index:-2}
+.cta::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(30,27,20,.5),rgba(30,27,20,.66))}
+.cta .eyebrow{color:rgba(255,255,255,.82);justify-content:center;display:flex}
+.cta h2{font-size:clamp(34px,6vw,80px);color:#fff;font-weight:300;margin:22px 0 20px}
+.cta h2 em{font-style:italic}
+.cta p{font-size:16px;color:rgba(255,255,255,.86);max-width:38ch;margin:0 auto 40px}
+
+/* --- footer --- */
+footer{background:var(--ink);color:rgba(250,247,240,.7);padding:clamp(64px,10vh,110px) clamp(20px,5vw,64px) 40px}
+.f-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;padding-bottom:52px;border-bottom:1px solid rgba(250,247,240,.14)}
+.f-brand .b{font-family:'Cormorant Garamond',serif;font-size:30px;letter-spacing:.3em;color:var(--paper);font-weight:500}
+.f-brand p{font-size:13px;margin-top:14px;max-width:30ch;color:rgba(250,247,240,.6)}
+.f-cols{display:flex;gap:clamp(40px,7vw,100px);flex-wrap:wrap}
+.f-col h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);margin-bottom:18px;font-family:'Inter';font-weight:400}
+.f-col a{display:block;font-size:14px;color:rgba(250,247,240,.72);padding:6px 0;transition:color .4s}
+.f-col a:hover{color:var(--paper)}
+.f-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:26px;font-size:12px;letter-spacing:.05em;color:rgba(250,247,240,.45)}
+
+/* --- responsive --- */
+@media(max-width:900px){
+  .menu{position:fixed;inset:0;background:var(--cream);flex-direction:column;justify-content:center;gap:30px;
+    transform:translateX(100%);transition:transform .6s var(--ease);z-index:99}
+  .menu.open{transform:none}
+  .menu a.link{color:var(--ink);font-size:15px}
+  .menu .book{border-color:var(--sage);color:var(--sage-deep)}
+  .burger{display:flex}
+  .intro-grid{grid-template-columns:1fr;gap:44px}
+  .intro-media{aspect-ratio:4/3;max-height:70vh}
+  .why-grid{grid-template-columns:1fr 1fr}
+  .why-lead{grid-column:span 2;flex-direction:column;align-items:flex-start}
+  .q-grid{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+  .g-a,.g-b,.g-c,.g-d,.g-e,.g-f,.g-g{grid-column:span 12;aspect-ratio:4/3}
+  .why-grid{grid-template-columns:1fr}
+  .why-lead{grid-column:span 1}
+  .hero .sub{flex-direction:column;align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important}
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero-media img{transform:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="#top" class="brand">VILLA GREL</a>
+  <div class="menu" id="menu">
+    <a href="#villa" class="link">The Villa</a>
+    <a href="#gallery" class="link">Gallery</a>
+    <a href="#setting" class="link">The Setting</a>
+    <a href="#journal" class="link">Journal</a>
+    <a href="#about" class="link">About</a>
+    <a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener" class="book">Book now</a>
+  </div>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- HERO -->
+<header class="hero" id="top">
+  <div class="hero-media"><img src="assets/img/hero.jpg" alt="Villa Grel on the hillside above Lake Como"></div>
+  <div class="hero-inner">
+    <div class="eyebrow">Cardina · Como — Lake Como, Italy</div>
+    <h1>A private retreat<br><em>above Lake Como</em></h1>
+    <div class="sub">
+      <p>A hillside house of four bedrooms and a garden that runs to the water, fifteen minutes above the city yet a world apart.</p>
+      <div class="hero-cta">
+        <a href="#villa" class="btn-ghost">Discover the villa</a>
+        <a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener" class="btn-solid">Book now</a>
+      </div>
+    </div>
+  </div>
+  <div class="scrollcue"><span>Scroll</span><span class="l"></span></div>
+</header>
+
+<!-- THE VILLA -->
+<section id="villa">
+  <div class="wrap intro">
+    <div class="intro-grid">
+      <div class="reveal">
+        <div class="eyebrow" style="display:flex;align-items:center;gap:16px;margin-bottom:24px"><span style="width:34px;height:1px;background:var(--stone)"></span>The Villa</div>
+        <h2>Three hundred and fifty square metres of calm, held between <em>olive trees and open water</em>.</h2>
+        <p>Villa Grel stands on the hillside at Cardina, one of the quiet, gated corners above Como. Three floors, four bedrooms, and terraces where the lake fills the whole horizon.</p>
+        <p>Room for ten around the garden table, and stillness enough for two on the balcony at dawn. Cars in the garage, dogs on the lawn, and the city a short drive down the hill.</p>
+        <div class="stats">
+          <div class="stat"><div class="n">10</div><div class="l">Guests</div></div>
+          <div class="stat"><div class="n">4</div><div class="l">Bedrooms</div></div>
+          <div class="stat"><div class="n">4</div><div class="l">Bathrooms</div></div>
+          <div class="stat"><div class="n">350</div><div class="l">Square metres</div></div>
+          <div class="stat"><div class="n">3</div><div class="l">Floors</div></div>
+          <div class="stat"><div class="n">&#8734;</div><div class="l">Lake views</div></div>
+        </div>
+      </div>
+      <div class="intro-media reveal d2">
+        <img src="assets/img/balcony.jpg" alt="Bedroom opening onto a balcony over Lake Como">
+        <span class="tag">The lake room</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">A Portrait of the House</div>
+      <h2 style="font-size:clamp(28px,3.6vw,46px);max-width:20ch">Rooms that hold the light, and a garden that holds the view.</h2>
+    </div>
+    <div class="g-grid">
+      <div class="g-item g-a reveal"><img src="assets/img/exterior.jpg" alt="The villa and its garden"></div>
+      <div class="g-item g-b reveal d1"><img src="assets/img/garden.jpg" alt="Garden with olive trees and lounge seating"></div>
+      <div class="g-item g-c reveal"><img src="assets/img/living_fire.jpg" alt="Living room with fireplace"></div>
+      <div class="g-item g-d reveal d1"><img src="assets/img/outdoor.jpg" alt="Outdoor dining under the parasol"></div>
+      <div class="g-item g-e reveal"><img src="assets/img/bed_green.jpg" alt="Double bedroom"></div>
+      <div class="g-item g-f reveal d1"><img src="assets/img/dining.jpg" alt="Dining room"></div>
+      <div class="g-item g-g reveal d2"><img src="assets/img/bed_twin.jpg" alt="Twin bedroom"></div>
+    </div>
+  </div>
+</section>
+
+<!-- THE SETTING -->
+<section class="setting" id="setting">
+  <div class="setting-bg"><img src="assets/img/hero.jpg" alt="Lake Como seen from Cardina"></div>
+  <div class="wrap">
+    <div class="shead reveal">
+      <div class="eyebrow">The Setting</div>
+      <h2>The lake begins <em>at the garden gate</em>.</h2>
+    </div>
+    <div class="places">
+      <div class="place reveal"><div class="idx">01</div><h3>Bellagio</h3><div class="meta">45 min by car</div><p>The point where the lake divides — cobbled lanes, gardens and long lunches.</p></div>
+      <div class="place reveal d1"><div class="idx">02</div><h3>Varenna</h3><div class="meta">Ferry across</div><p>A fishing village of ochre houses and a lakeside walk carved into the rock.</p></div>
+      <div class="place reveal d2"><div class="idx">03</div><h3>Como</h3><div class="meta">15 min down the hill</div><p>Silk ateliers, the cathedral, and aperitivo along the promenade.</p></div>
+      <div class="place reveal"><div class="idx">04</div><h3>Brunate</h3><div class="meta">The funicular</div><p>A short climb to the balcony over the lake and the ridge trails beyond.</p></div>
+      <div class="place reveal d1"><div class="idx">05</div><h3>On the water</h3><div class="meta">Private boat</div><p>A wooden runabout at golden hour, arranged for your arrival.</p></div>
+      <div class="place reveal d2"><div class="idx">06</div><h3>The trails</h3><div class="meta">From the door</div><p>Chestnut woods and ridge walks that begin a few steps from the gate.</p></div>
+      <div class="place reveal"><div class="idx">07</div><h3>The table</h3><div class="meta">Fine dining</div><p>From Michelin rooms to lakeside trattorie — a reservation is a call away.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section id="why">
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-lead reveal">
+        <h2>Book with us <em>directly</em> — the same villa, without the platform.</h2>
+        <p>The same dates at the same rate you would pay online, only closer to the people who own the house. No service fees, and a direct line for anything you need.</p>
+      </div>
+      <div class="why-cell reveal"><div class="num">i.</div><h3>Best rate, no fees</h3><p>The platform rate without the platform commission — value that stays between us.</p></div>
+      <div class="why-cell reveal d1"><div class="num">ii.</div><h3>The owners, directly</h3><p>Plan your stay with the family who knows the house, not an anonymous inbox.</p></div>
+      <div class="why-cell reveal d2"><div class="num">iii.</div><h3>Concierge on request</h3><p>Boat, chef, transfers and tables — arranged before you arrive.</p></div>
+      <div class="why-cell reveal"><div class="num">iv.</div><h3>Garden &amp; parking</h3><p>A private lawn under the olives, a garage and space for every car.</p></div>
+      <div class="why-cell reveal d1"><div class="num">v.</div><h3>Lake &amp; mountain views</h3><p>Three bedrooms and the terrace look out over the water and the hills.</p></div>
+      <div class="why-cell reveal d2"><div class="num">vi.</div><h3>Dogs welcome</h3><p>Bring the whole family — the four-legged ones included.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTES -->
+<section class="quotes" id="reviews">
+  <div class="wrap">
+    <div class="shead reveal"><div class="eyebrow">In their words</div>
+      <h2 style="font-size:clamp(26px,3.2vw,42px)">Rated 9.0 by recent guests.</h2></div>
+    <div class="q-grid">
+      <div class="q reveal"><blockquote>A wonderful position over the lake — generous space inside and out, and three bedrooms with an extraordinary view.</blockquote><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="by">Guest review · Booking.com</div></div>
+      <div class="q reveal d1"><blockquote>Perfect for ten without ever feeling crowded. A lovely big garden and a great view.</blockquote><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="by">Guest review · Airbnb</div></div>
+      <div class="q reveal d2"><blockquote>Even bigger than the photos. Fully equipped, spotless, and the team were quick and helpful throughout.</blockquote><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="by">Guest review · Airbnb</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING CTA -->
+<section class="cta" id="book">
+  <div class="cta-bg"><img src="assets/img/outdoor.jpg" alt="The garden table set for dinner"></div>
+  <div class="wrap">
+    <div class="eyebrow reveal">Your dates, the whole villa</div>
+    <h2 class="reveal d1">Come and stay <em>a while</em>.</h2>
+    <p class="reveal d1">Check live availability and reserve your dates for the whole villa through our management team.</p>
+    <a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener" class="btn-solid reveal d2" style="font-size:13px;padding:18px 40px">Book now</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="about">
+  <div class="wrap">
+    <div class="f-top">
+      <div class="f-brand">
+        <div class="b">VILLA GREL</div>
+        <p>A private residence on the hillside at Cardina, above Como — Lake Como, Italy.</p>
+      </div>
+      <div class="f-cols">
+        <div class="f-col"><h4>Explore</h4>
+          <a href="#villa">The Villa</a><a href="#gallery">Gallery</a><a href="#setting">The Setting</a><a href="#journal">Journal</a></div>
+        <div class="f-col"><h4>Book</h4>
+          <a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener">Availability &amp; rates</a><a href="#reviews">Reviews</a><a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener">Book now</a></div>
+        <div class="f-col"><h4>Reach us</h4>
+          <a href="#">Instagram</a><a href="#">WhatsApp</a><a href="#">Email</a></div>
+      </div>
+    </div>
+    <div class="f-bottom">
+      <span>© 2026 Villa Grel — Cardina, Como</span>
+      <span>Privacy · Terms · Cookies</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+// nav solidify
+const nav=document.getElementById('nav');
+const hero=document.querySelector('.hero');
+const io=new IntersectionObserver(([e])=>{nav.classList.toggle('solid',!e.isIntersecting)},{rootMargin:'-72px 0px 0px 0px'});
+io.observe(hero);
+// mobile menu
+const burger=document.getElementById('burger'),menu=document.getElementById('menu');
+burger.addEventListener('click',()=>menu.classList.toggle('open'));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
+// reveal
+const ro=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');ro.unobserve(e.target)}})},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+</script>
+</body>
+</html>
