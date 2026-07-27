@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Villa Grel — A private retreat above Lake Como</title>
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Inter:wght@300;400;500&family=Great+Vibes&display=swap" rel="stylesheet">
@@ -57,7 +58,8 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.08
   transition:background .6s var(--ease),padding .6s var(--ease),box-shadow .6s var(--ease);
 }
 .nav.solid{background:var(--cream);box-shadow:0 1px 0 var(--line-soft),0 10px 30px -24px rgba(37,33,24,.5);padding-top:18px;padding-bottom:18px}
-.nav .brand{font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:.34em;font-weight:500;color:#fff;transition:color .6s var(--ease)}
+.nav .brand{display:inline-flex;align-items:center;gap:11px;font-family:'Cormorant Garamond',serif;font-size:20px;letter-spacing:.34em;font-weight:500;color:#fff;transition:color .6s var(--ease)}
+.nav .brand .brandmark{width:24px;height:auto;flex:0 0 auto}
 .nav.solid .brand{color:var(--ink)}
 .nav .brand .dot{color:var(--stone)}
 .menu{display:flex;gap:34px;align-items:center}
@@ -81,22 +83,18 @@ h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:400;line-height:1.08
 .nav.solid .burger span{background:var(--ink)}
 
 /* --- hero --- */
-.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:flex-end;overflow:hidden}
+.hero{position:relative;height:100vh;min-height:640px;display:flex;align-items:center;justify-content:center;overflow:hidden}
 .hero-media{position:absolute;inset:0;z-index:-2}
 .hero-media img{transform:scale(1.08);animation:kb 24s ease-out forwards}
 @keyframes kb{to{transform:scale(1)}}
 .hero::after{content:"";position:absolute;inset:0;z-index:-1;
-  background:linear-gradient(180deg,rgba(30,27,20,.34) 0%,rgba(30,27,20,.05) 32%,rgba(30,27,20,.12) 62%,rgba(30,27,20,.62) 100%)}
-.hero-inner{width:100%;padding:0 clamp(20px,5vw,64px) clamp(46px,7vh,86px);color:#fff}
-.hero .eyebrow{color:rgba(255,255,255,.82);margin-bottom:26px}
-.hero h1{font-size:clamp(44px,8.5vw,116px);font-weight:300;color:#fff;letter-spacing:.01em}
-.hero h1 em{font-style:italic;font-weight:300}
-.hero .sub{
-  display:flex;align-items:flex-end;justify-content:space-between;gap:30px;flex-wrap:wrap;
-  margin-top:34px;padding-top:30px;border-top:1px solid rgba(255,255,255,.28);max-width:none
-}
-.hero .sub p{font-size:15px;color:rgba(255,255,255,.9);max-width:340px;font-weight:300}
-.hero-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+  background:radial-gradient(ellipse 72% 62% at 50% 50%,rgba(28,25,18,.42) 0%,rgba(28,25,18,0) 70%),linear-gradient(180deg,rgba(30,27,20,.32) 0%,rgba(30,27,20,.06) 32%,rgba(30,27,20,.12) 62%,rgba(30,27,20,.6) 100%)}
+.hero-inner{width:100%;padding:0 clamp(20px,5vw,64px);color:#fff;text-align:center}
+.hero-brand{display:flex;flex-direction:column;align-items:center}
+.hero .logomark{width:clamp(64px,8.5vw,104px);height:auto;color:#fff;opacity:.95;margin-bottom:clamp(20px,3.2vw,34px);filter:drop-shadow(0 2px 24px rgba(20,18,12,.45))}
+.hero .wordmark{font-family:'Cormorant Garamond',serif;font-weight:500;color:#fff;font-size:clamp(44px,9vw,98px);line-height:1;letter-spacing:.14em;text-transform:uppercase;padding-left:.14em;margin:0;text-shadow:0 2px 30px rgba(20,18,12,.4)}
+.hero-tag{font-size:clamp(11px,1.5vw,14px);letter-spacing:.34em;text-transform:uppercase;color:rgba(255,255,255,.88);margin-top:clamp(22px,3vw,30px);text-shadow:0 1px 18px rgba(20,18,12,.5)}
+.hero-cta{display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center;margin-top:clamp(30px,4vw,44px)}
 .btn-ghost{
   font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#fff;
   border:1px solid rgba(255,255,255,.6);padding:15px 30px;border-radius:2px;transition:all .5s var(--ease)
@@ -240,7 +238,7 @@ footer{background:var(--ink);color:rgba(250,247,240,.7);padding:clamp(64px,10vh,
 <body>
 
 <nav class="nav" id="nav">
-  <a href="#top" class="brand">VILLA GREL</a>
+  <a href="#top" class="brand"><svg class="brandmark" viewBox="0 0 150 96" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linejoin="miter" aria-hidden="true"><rect x="29" y="25" width="46" height="46" transform="rotate(45 52 48)"/><rect x="75" y="25" width="46" height="46" transform="rotate(45 98 48)"/></svg>VILLA GREL</a>
   <div class="menu" id="menu">
     <a href="#villa" class="link">The Villa</a>
     <a href="#gallery" class="link">Gallery</a>
@@ -256,10 +254,10 @@ footer{background:var(--ink);color:rgba(250,247,240,.7);padding:clamp(64px,10vh,
 <header class="hero" id="top">
   <div class="hero-media"><img src="assets/img/hero.jpg" alt="Villa Grel on the hillside above Lake Como"></div>
   <div class="hero-inner">
-    <div class="eyebrow">Cardina · Como — Lake Como, Italy</div>
-    <h1>A private retreat<br><em>above Lake Como</em></h1>
-    <div class="sub">
-      <p>A hillside house of four bedrooms and a garden that runs to the water, fifteen minutes above the city yet a world apart.</p>
+    <div class="hero-brand">
+      <svg class="logomark" viewBox="0 0 150 96" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linejoin="miter" aria-hidden="true"><rect x="29" y="25" width="46" height="46" transform="rotate(45 52 48)"/><rect x="75" y="25" width="46" height="46" transform="rotate(45 98 48)"/></svg>
+      <h1 class="wordmark">Villa Grel</h1>
+      <div class="hero-tag">A private retreat above Lake Como</div>
       <div class="hero-cta">
         <a href="#villa" class="btn-ghost">Discover the villa</a>
         <a href="https://www.myhomeincomo.com/villa-grel?guests_rooms=2,0" target="_blank" rel="noopener" class="btn-solid">Book now</a>
@@ -496,7 +494,7 @@ footer{background:var(--ink);color:rgba(250,247,240,.7);padding:clamp(64px,10vh,
   <div class="wrap">
     <div class="f-top">
       <div class="f-brand">
-        <div class="b">VILLA GREL</div>
+        <div class="b"><svg viewBox="0 0 150 96" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linejoin="miter" aria-hidden="true" style="width:26px;height:auto;vertical-align:middle;margin-right:12px;color:var(--stone)"><rect x="29" y="25" width="46" height="46" transform="rotate(45 52 48)"/><rect x="75" y="25" width="46" height="46" transform="rotate(45 98 48)"/></svg>VILLA GREL</div>
         <p>A private residence on the hillside at Cardina, above Como — Lake Como, Italy.</p>
       </div>
       <div class="f-cols">
